@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gfmni</title>
+<meta name="description" content="gfmni">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { text-align: center; }
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 3vh, 2rem);
+    flex: 1;
+    justify-content: center;
+  }
+  main a {
+    color: var(--fg);
+    text-decoration: none;
+    font-size: clamp(2.1rem, 8vw, 4.8rem);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    transition: color 0.22s ease;
+  }
+  main a:hover, main a:focus-visible { color: var(--muted); }
+  main a:focus-visible {
+    outline: 1px solid var(--muted);
+    outline-offset: 6px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap" style="align-items:center; flex:1; justify-content:space-between;">
+  <main>
+    <a href="https://t.me/gfmni"            target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.youtube.com/@gfmni" target="_blank" rel="noopener">Youtube</a>
+    <a href="https://soundcloud.com/gfmni"   target="_blank" rel="noopener">Soundcloud</a>
+    <a href="https://tiktok.com/@gfmni"      target="_blank" rel="noopener">Tiktok</a>
+    <a href="https://t.me/gfmni?direct"      target="_blank" rel="noopener">Contact</a>
+  </main>
+  <div class="bottom-row" style="width:100%;">
+    <nav class="nav-links">
+      <a href="rules.html">Rules</a>
+      <a href="submit.html">Submit</a>
+    </nav>
+    <span class="nav-links" style="color:var(--muted); font-style:italic; letter-spacing:0.2em;">gfmni 2026-2xxx</span>
+  </div>
+</div>
+</body>
+</html>

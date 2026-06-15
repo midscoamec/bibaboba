@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gfmni - submit</title>
+<meta name="description" content="How to submit your track to gfmni">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <h1 class="page-title" data-lang="en">How to submit</h1>
+  <h1 class="page-title" data-lang="ru">Как оформить</h1>
+
+  <main>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title" data-lang="en">Track title</div>
+        <div class="step-title" data-lang="ru">Название</div>
+        <div class="step-desc" data-lang="en">Format: <code>Artist - Track name</code></div>
+        <div class="step-desc" data-lang="ru">Формат: <code>Артист - Название</code></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title" data-lang="en">Files</div>
+        <div class="step-title" data-lang="ru">Файлы</div>
+        <div class="step-desc" data-lang="en">Cover without compression + audio file (MP3 preferred). Video clip - MP4.</div>
+        <div class="step-desc" data-lang="ru">Обложка без сжатия + аудиофайл (желательно MP3). Клип - MP4.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title" data-lang="en">Genre &amp; hashtags</div>
+        <div class="step-title" data-lang="ru">Жанр и хештеги</div>
+        <div class="step-desc" data-lang="en">List the genre and relevant hashtags.</div>
+        <div class="step-desc" data-lang="ru">Укажи жанр и хештеги для релиза.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title" data-lang="en">Platforms</div>
+        <div class="step-title" data-lang="ru">Платформы</div>
+        <div class="step-desc" data-lang="en">Where to release? Use the format <code>STY</code>. e.g. Telegram only → <code>T</code></div>
+        <div class="step-desc" data-lang="ru">Куда выкладывать? Формат <code>STY</code>. Например, только Telegram → <code>T</code></div>
+        <div class="platforms">
+          <span class="tag">S - Soundcloud</span>
+          <span class="tag">T - Telegram</span>
+          <span class="tag">Y - Youtube</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title" data-lang="en">Description <span class="optional">optional</span></div>
+        <div class="step-title" data-lang="ru">Описание <span class="optional">необязательно</span></div>
+        <div class="step-desc" data-lang="en">Any text to accompany the release.</div>
+        <div class="step-desc" data-lang="ru">Желаемое описание для релиза.</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="bottom-row">
+    <nav class="nav-links">
+      <a href="index.html">gfmni</a>
+      <a href="rules.html">Rules</a>
+      <a href="https://t.me/gfmni?direct" target="_blank" rel="noopener">@gfmni</a>
+    </nav>
+    <div class="lang-switch">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <span class="sep">/</span>
+      <button id="btn-ru" onclick="setLang('ru')">RU</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setLang(lang) {
+    document.body.classList.toggle('lang-ru', lang === 'ru');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+    document.documentElement.lang = lang;
+  }
+</script>
+</body>
+</html>

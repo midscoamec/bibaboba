@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gfmni — rules</title>
+<meta name="description" content="gfmnc chat rules">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <h1 class="page-title" data-lang="en">Rules</h1>
+  <h1 class="page-title" data-lang="ru">Правила</h1>
+
+  <main>
+    <div class="step">
+      <div class="step-body">
+        <div class="step-title" data-lang="en">Porn and gore</div>
+        <div class="step-title" data-lang="ru">Порно и расчленёнка</div>
+        <div class="step-desc" data-lang="en">Instant ban, no warning</div>
+        <div class="step-desc" data-lang="ru">Бан без предупреждения</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-body">
+        <div class="step-title" data-lang="en">Other people's contacts and ads</div>
+        <div class="step-title" data-lang="ru">Чужие номера и реклама</div>
+        <div class="step-desc" data-lang="en">Instant ban, no warning</div>
+        <div class="step-desc" data-lang="ru">Бан без предупреждения</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-body">
+        <div class="step-title" data-lang="en">Suspicious links and spam</div>
+        <div class="step-title" data-lang="ru">Подозрительные ссылки и спам</div>
+        <div class="step-desc" data-lang="en">Instant ban, no warning</div>
+        <div class="step-desc" data-lang="ru">Бан без предупреждения</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="bottom-row">
+    <nav class="nav-links">
+      <a href="index.html">gfmni</a>
+      <a href="submit.html">Submit</a>
+      <a href="https://t.me/gfmnc" target="_blank" rel="noopener">@gfmnc</a>
+    </nav>
+    <div class="lang-switch">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <span class="sep">/</span>
+      <button id="btn-ru" onclick="setLang('ru')">RU</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setLang(lang) {
+    document.body.classList.toggle('lang-ru', lang === 'ru');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+    document.documentElement.lang = lang;
+  }
+</script>
+</body>
+</html>
