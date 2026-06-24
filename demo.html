@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>GFMNI - Дистрибуция музыки на Spotify, Apple Music, TikTok и другие площадки</title>
+  <meta name="description" content="Музыкальная дистрибуция GFMNI. Размещение релизов на Spotify, Apple Music, YouTube Music, TikTok, VK Музыка, Яндекс Музыка. Подтверждение профилей артиста и быстрый выпуск релизов." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="GFMNI" />
+  <meta property="og:title" content="GFMNI - Дистрибуция музыки на Spotify, Apple Music, TikTok и другие площадки" />
+  <meta property="og:description" content="Музыкальная дистрибуция GFMNI. Размещение релизов на Spotify, Apple Music, YouTube Music, TikTok, VK Музыка, Яндекс Музыка." />
+  <meta property="og:image" content="block1.png" />
+
+  <!-- Fonts: Inter & Material Symbols Rounded 700 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,700,1,0" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #111111;
+      --border: #242424;
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.6);
+      --accent: #F5C800; /* Yellow accent */
+      --radius-lg: 32px;
+      --radius-md: 24px;
+      --max-width: 1280px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wrap {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .material-symbols-rounded {
+      font-size: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 24px 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+      pointer-events: none;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: auto;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #050505 0%, #000 100%);
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      right: -5%;
+      width: 60vw;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      /* Smooth fade into the black background on the left */
+      mask-image: linear-gradient(to right, transparent 0%, black 30%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
+    }
+
+    .hero-sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70vh;
+      height: 70vh;
+      background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.8) 20%, transparent 60%);
+      border-radius: 50%;
+      z-index: 1;
+      filter: blur(40px);
+    }
+
+    .hero-bg img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      width: 50%;
+      padding: 120px 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 6vw, 6.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      text-wrap: balance;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      padding: 0 32px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .section {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 64px;
+      line-height: 1;
+    }
+
+    .features-layout {
+      display: grid;
+      grid-template-columns: 3.5fr 6.5fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .features-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .features-visual img {
+      width: 100%;
+      max-width: 380px;
+      max-height: 70vh;
+      object-fit: contain;
+      opacity: 0.6;
+      filter: brightness(0.7) contrast(1.2);
+      transform: rotate(-2deg);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-icon {
+      color: var(--accent);
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .artists-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .artist-item {
+      display: block;
+      padding: 32px 48px;
+      border-radius: var(--radius-lg);
+      font-size: clamp(3rem, 8vw, 8rem);
+      font-weight: 900;
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      transition: background 0.3s ease, color 0.3s ease, padding 0.3s ease;
+      cursor: pointer;
+    }
+
+    .artist-item:hover {
+      background: var(--text);
+      color: var(--bg);
+      padding-left: 64px;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .plan-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      transition: background 0.3s ease, color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Plan hover logic: turning text dark when background is white */
+    .plan-card:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .plan-card:hover .plan-muted {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .plan-card:hover .plan-icon {
+      color: var(--bg);
+    }
+
+    .plan-header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .plan-badge {
+      align-self: flex-start;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .plan-card:hover .plan-badge {
+      background: rgba(0,0,0,0.05);
+      border-color: rgba(0,0,0,0.1);
+      color: var(--bg);
+    }
+
+    .plan-price {
+      font-size: clamp(3rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .plan-muted {
+      font-size: 15px;
+      color: var(--muted);
+      transition: color 0.3s ease;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .plan-icon {
+      font-size: 20px;
+      color: var(--accent);
+      transition: color 0.3s ease;
+    }
+
+    .pricing-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--accent);
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: var(--surface);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    .plan-disclaimer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    .cta-section {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 80px 64px;
+      text-align: center;
+      margin-bottom: 120px;
+      border: 1px solid var(--border);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .cta-section p {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-socials a {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .footer-socials a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-content {
+        width: 60%;
+      }
+      .features-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .features-visual img {
+        max-height: 40vh;
+      }
+      .artist-item {
+        padding: 24px;
+      }
+      .artist-item:hover {
+        padding-left: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .menu-btn {
+        display: flex;
+      }
+      .hero {
+        align-items: flex-start;
+        padding-top: 120px;
+      }
+      .hero-bg {
+        width: 100vw;
+        right: 0;
+        top: auto;
+        bottom: 0;
+        height: 60vh;
+        mask-image: linear-gradient(to top, transparent 0%, black 50%);
+        -webkit-mask-image: linear-gradient(to top, transparent 0%, black 50%);
+      }
+      .hero-content {
+        width: 100%;
+        padding: 0;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
+      .cta-section {
+        padding: 48px 24px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Simple fade-in animation class */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav-container">
+      <a href="#" class="logo">GFMNI<span>.</span></a>
+      <nav class="nav-links">
+        <a href="#features">Возможности</a>
+        <a href="#artists">Артисты</a>
+        <a href="#plans">Планы</a>
+      </nav>
+      <button class="menu-btn" aria-label="Menu">
+        <span class="material-symbols-rounded">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-sun"></div>
+      <img src="block1.png" alt="Фон GFMNI" />
+    </div>
+    <div class="wrap">
+      <div class="hero-content fade-up">
+        <h1>ВАШ ТРЕЧО<br>на всех площадках<br>за 3 дня</h1>
+        <p class="hero-sub">
+          И ДАЖЕ РАНЬШЕ! С GFMNI ВОЗМОЖНО ВСЁ
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section wrap">
+    <h2 class="section-title fade-up">Возможности</h2>
+    <div class="features-layout">
+      
+      <div class="features-visual fade-up">
+        <img src="block_2.png" alt="Декоративный телефон" />
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card fade-up" style="transition-delay: 0.1s;">
+          <span class="material-symbols-rounded feature-icon">verified</span>
+          <h3>Подтверждение профилей</h3>
+          <p>В Spotify for Artists, Apple Music for Artists, YouTube Music, TikTok и других сервисах.</p>
+        </div>
+
+        <div class="feature-card fade-up" style="transition-delay: 0.2s;">
+          <span class="material-symbols-rounded feature-icon">attach_money</span>
+          <h3>Выплаты в крипте</h3>
+          <p>Быстрые и безопасные переводы в криптовалюте напрямую на ваш кошелек.</p>
+        </div>
+
+        <div class="feature-card fade-up" style="transition-delay: 0.3s;">
+          <span class="material-symbols-rounded feature-icon">support_agent</span>
+          <h3>Поддержка артистов</h3>
+          <p>Помощь с питчингом и продвижением в соцсетях.</p>
+        </div>
+
+        <div class="feature-card fade-up" style="transition-delay: 0.4s;">
+          <span class="material-symbols-rounded feature-icon">bolt</span>
+          <h3>Быстрый релиз</h3>
+          <p>Треки проходят проверку в приоритетном порядке.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="artists" class="section wrap">
+    <div class="artists-list">
+      <a href="https://t.me/balushnap" target="_blank" class="artist-item fade-up">DJ ZAZATRONIKA</a>
+      <a href="https://t.me/okouyk" target="_blank" class="artist-item fade-up" style="transition-delay: 0.1s;">KYOUKO</a>
+      <a href="#" class="artist-item fade-up" style="transition-delay: 0.2s;">ЭТО МОЖЕТЕ БЫТЬ ВЫ</a>
+    </div>
+  </section>
+
+  <section id="plans" class="section wrap">
+    <h2 class="section-title fade-up">Планы</h2>
+    
+    <div class="pricing-toggle fade-up">
+       <span>Оплата за месяц</span>
+       <label class="switch">
+         <input type="checkbox" id="pricingToggle">
+         <span class="slider round"></span>
+       </label>
+       <span>Процент с роялти</span>
+    </div>
+    
+    <div class="plan-disclaimer fade-up">
+      "ПРОЦЕНТ С РОЯЛТИ" ТОЛЬКО ПРИ ХОРОШИХ БАЗОВЫХ ПРОСЛУШИВАНИЯХ<br>
+      <span style="opacity: 0.7;">(при оплате на год выходит дешевле)</span>
+    </div>
+
+    <div class="plans-grid">
+      
+      <div class="plan-card fade-up">
+        <div class="plan-header">
+          <span class="plan-badge">Для одного артиста</span>
+          <h3>GFMNI.LARP</h3>
+        </div>
+        <div>
+          <div class="plan-price" id="larp-price">2.67 USDT</div>
+          <div class="plan-muted" id="larp-subtitle">/ МЕСЯЦ • 85/15 РОЯЛТИ</div>
+        </div>
+        <ul class="plan-features">
+          <li><span class="material-symbols-rounded plan-icon">check_circle</span> До 20 релизов в месяц</li>
+          <li><span class="material-symbols-rounded plan-icon">check_circle</span> Подтверждение профилей</li>
+          <li><span class="material-symbols-rounded plan-icon">check_circle</span> Быстрая модерация</li>
+          <li><span class="material-symbols-rounded plan-icon">check_circle</span> Поддержка и сопровождение</li>
+        </ul>
+      </div>
+
+      <div class="plan-card fade-up" style="transition-delay: 0.2s;">
+        <div class="plan-header">
+          <span class="plan-badge">Для команд</span>
+          <h3>GFMNI.TRUE</h3>
+        </div>
+        <div>
+          <div class="plan-price" id="true-price">6.88 USDT</div>
+          <div class="plan-muted" id="true-subtitle">/ МЕСЯЦ • 90/10 РОЯЛТИ</div>
+        </div>
+        <ul class="plan-features">
+          <li><span class="material-symbols-rounded plan-icon">check_circle</span> Неограниченно артистов</li>
+          <li><span class="material-symbols-rounded plan-icon">check_circle</span> Неограниченно релизов</li>
+          <li><span class="material-symbols-rounded plan-icon">check_circle</span> Подтверждение профилей</li>
+          <li><span class="material-symbols-rounded plan-icon">check_circle</span> Поддержка и сопровождение</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="cta-section fade-up">
+      <h2>Присоединяйтесь к GFMNI</h2>
+      <p>Начните дистрибуцию уже сегодня. Быстрая модерация, выплаты в крипте и премиальная поддержка для вас и вашей команды.</p>
+      <a href="https://t.me/gfmni" target="_blank" class="btn btn-primary">Написать в Telegram</a>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">GFMNI</div>
+      <ul class="footer-socials">
+        <li><a href="https://t.me/gfmni" target="_blank">Telegram</a></li>
+        <li><a href="https://tiktok.com/@gfmni" target="_blank">TikTok</a></li>
+        <li><a href="https://www.youtube.com/@gfmni" target="_blank">YouTube</a></li>
+        <li><a href="https://soundcloud.com/gfmni" target="_blank">SoundCloud</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll animations
+    document.addEventListener("DOMContentLoaded", () => {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      const animatedElements = document.querySelectorAll('.fade-up');
+      animatedElements.forEach(el => observer.observe(el));
+      
+      const pricingToggle = document.getElementById('pricingToggle');
+      const larpPrice = document.getElementById('larp-price');
+      const larpSubtitle = document.getElementById('larp-subtitle');
+      const truePrice = document.getElementById('true-price');
+      const trueSubtitle = document.getElementById('true-subtitle');
+
+      if(pricingToggle) {
+        pricingToggle.addEventListener('change', (e) => {
+          if(e.target.checked) {
+            larpPrice.textContent = '0 USDT';
+            larpSubtitle.textContent = '/ МЕСЯЦ • 75/25 РОЯЛТИ';
+            
+            truePrice.textContent = '0 USDT';
+            trueSubtitle.textContent = '/ МЕСЯЦ • 70/30 РОЯЛТИ';
+          } else {
+            larpPrice.textContent = '2.67 USDT';
+            larpSubtitle.textContent = '/ МЕСЯЦ • 85/15 РОЯЛТИ';
+            
+            truePrice.textContent = '6.88 USDT';
+            trueSubtitle.textContent = '/ МЕСЯЦ • 90/10 РОЯЛТИ';
+          }
+        });
+      }
+
+      // Basic mobile menu toggle logic
+      const menuBtn = document.querySelector('.menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if(menuBtn) {
+        menuBtn.addEventListener('click', () => {
+           const isVisible = navLinks.style.display === 'flex';
+           navLinks.style.display = isVisible ? 'none' : 'flex';
+           if(!isVisible) {
+              navLinks.style.flexDirection = 'column';
+              navLinks.style.position = 'absolute';
+              navLinks.style.top = '70px';
+              navLinks.style.right = '24px';
+              navLinks.style.background = '#111';
+              navLinks.style.padding = '24px';
+              navLinks.style.borderRadius = '16px';
+              navLinks.style.border = '1px solid #242424';
+           }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
